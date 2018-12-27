@@ -1,0 +1,17 @@
+version: '2'
+services:
+  mqtt:
+    image: ansi/mosquitto
+    container_name: c-beam
+    ports:
+      - '1883:1883'
+    entrypoint: /usr/local/sbin/mosquitto
+  announcer:
+    image: cbase/c-blinken
+    container_name: c-blinken
+    environment:
+      MSGFLO_BROKER: 'mqtt://mqtt:1883'
+    links:
+      - mqtt
+    volumes:
+      - ./animations:/var/c-blinken/animations
