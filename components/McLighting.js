@@ -92,7 +92,7 @@ exports.getComponent = () => {
           return Promise.resolve('NO STATE');
         }
         return client.send(color.rgb(state.color).hex())
-          .then(() => client.send(`?${state.delay_ms}`))
+          .then(() => client.send(`?${state.delay_ms || state.speed}`))
           .then(() => client.send(`%${state.brightness}`))
           .then(() => client.send(`/${state.mode}`));
       }))
