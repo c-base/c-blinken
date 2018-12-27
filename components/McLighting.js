@@ -45,7 +45,7 @@ exports.getComponent = () => {
       });
       return;
     }
-    if (c.state.lights.length < 1) {
+    if (!c.state.lights || c.state.lights.length < 1) {
       // We need connected lights to process commands
       return;
     }
