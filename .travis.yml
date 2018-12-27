@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+- lts/*
+services:
+- docker
+before_script:
+- docker build -t cbase/c-blinken:latest .
+- docker-compose up -d
+- docker-compose ps
+script:
+- npm test
+deploy:
+- provider: script
+  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker tag cbase/c-blinken:latest
+    "cbase/c-blinken:${TRAVIS_TAG}" && docker push "cbase/c-blinken:${TRAVIS_TAG}"
+  on:
+    tags: true
+    repo: c-base/c-blinken
+- provider: script
+  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push
+    "cbase/c-blinken:latest"
+  on:
+    branch: master
+    repo: c-base/c-blinken
+env:
+  global:
+  - secure: J2+VITa3eSnHFLQCYIVoAlEnWmnvQWVbNIbqlGpQfcSlB1LpfAKwa+vZPFaS/q2MJGEqfQJQ9hWP2uUyNJ+BspN9bEVy35l9H3EkgzaPCS4o7T/EnMw/Y39ODkGAnz6EFHyeiMaA69oDI/398rhS0tjGEGpT+aLAoJwKvCjapYKq+jTbupEbJuhncKCdKsp216NjIkoaUzfi+Dz4YDu8h1kS3ir4ELww0E3LFfr6pEx3UUtDE/hgm1jbOekOeQixbyziQj0MiRVCgdHVoDxQQxpGkRpmrVVdNFh+cuWNVhwqlhvuionm+pmBhe1HAEY8b2WA6npZPF0nRoENed5qahiu4L0/sJSZfi+dETUEO449BtrVA6Z77F4wO1E4pSyeNG+F9Lh/IZ/k6r/5MqukMshP8631CRqQwypyg2XY9bueDtSQQwHf9S8yNjVJGDzEJ7HZbL0wavw+iyY3MSVZZoB+o7Cxct/MZwszNqFn5vXBSPD1KLsLVtOCdQDxoF+rwW7oKKoFzpfHSapD6iQH9sGLBz5nwIRSemwJ27ncOjPBhWqTC8GZFLLs2ygpopkQpRGP1IaJfpFwkXvvHuDaON0g7mARnhYE1K8/eu26CA1WWaahQ0iO/VcCqUUBy8httgo60Yol5drvapa/LuzKjNVUMELMFDIwq6FghAUKdw8=
+  - secure: KSM9/hsV6iCei1zIBJsMaLz8qAIrpL2p2RDe0XjNWHXTVvfXsutalSTQ4x9K8yo9F6LbxVQiFAQgr7Ov/Zht988RQWDLout2O4PfYFBfUqi4iVFf2Chj7j4gm9y5oSo771cvDM4Mz8QrNpJMK8Y7PjtWnQ8SiNZLJgsv/ozuv6ylrIopXgeQiZyBAKxcYiuAjKzZ7VHd8S2A7Nw3CjMez2O1xLXT4VfZ+aJdQzpqxxvbETTNtSySOV/qqzCLqOCJY9kt+3KcxiaFhBMwxScgBPIThDnAHFqhP8NhldIgFlk1Q37a0m+1/WpepLin5NohVDLHuVvaMrp+Nl5qb5fCDzUjL191OjOEYl82chLKU6oGCRnKDrTjL847QJaKFGy6mx1XHE3jmBFyAkJGDeTbDYgvIclg2LXKdg55JN9yd068eiCk4l5WfmpU1BNwbhAwKl12WyMM805OA3MwZyeeJ3EMkVS1h/v/RwY3qimuJdYmAd3ZuhlDNo5FcQh12XTpn9SS1rGqxbVmbpMzWTC7N1T57aQOOTUWBvmhz0lOrAH5mS5LZvZPbLATe5Uzg82SVD7p3liz2ZtAlD32OzB9rrp4BUEmKhXysVmuWm11FA8RubIb8JxxkCqTQ4JeUmw5aWHuNHx92Am45wGR4tO4riZvTaIepJ72T7gJZ3EOT3k=
