@@ -4,10 +4,10 @@
   "description": "Animations manager for c-base and c-flo",
   "main": "index.js",
   "scripts": {
-    "dev": "noflo-nodejs --graph graphs/Animate.json --secret=c-blinken",
+    "dev": "noflo-nodejs --graph graphs/Crash.json --secret=c-blinken --capture-output=false",
     "pretest": "eslint lib/*.js components/*.js",
     "postinstall": "noflo-cache-preheat",
-    "start": "noflo-runtime-msgflo --name c-blinken --cache=true --basedir . --graph c-blinken/Animate --debug --verbose --capture-output=false",
+    "start": "noflo-runtime-msgflo --name c-blinken --cache=true --basedir . --graph c-blinken/Crash",
     "test": "mocha spec/*.js"
   },
   "repository": {
