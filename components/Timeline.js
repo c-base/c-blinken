@@ -4,7 +4,7 @@ function replaceInCommand(command, state) {
   return command
     .replace('__START__', state.startTime.toISOString())
     .replace('__END__', state.endTime.toISOString())
-    .replace('__ELAPSED__', state.elapsed);
+    .replace('__ELAPSED__', parseInt(state.elapsed, 10));
 }
 
 exports.getComponent = () => {
