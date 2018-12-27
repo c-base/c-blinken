@@ -1,0 +1,317 @@
+{
+    "caseSensitive": false,
+    "properties": {
+        "name": "ExecuteTimeline",
+        "description": "Execute a timeline animation",
+        "icon": "play",
+        "environment": {
+            "type": "noflo-nodejs"
+        }
+    },
+    "inports": {
+        "run": {
+            "process": "c-blinken/Timeline_cii0y",
+            "port": "start",
+            "metadata": {
+                "x": -144,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "filename": {
+            "process": "c-blinken/AnimationsDir_ccoo8",
+            "port": "in",
+            "metadata": {
+                "x": -144,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "command": {
+            "process": "c-blinken/Timeline_cii0y",
+            "port": "command",
+            "metadata": {
+                "x": 972,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "error": {
+            "process": "core/Merge_ylka8",
+            "port": "out",
+            "metadata": {
+                "x": 972,
+                "y": 540,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "finished": {
+            "process": "core/Split_gq684",
+            "port": "out",
+            "metadata": {
+                "x": 972,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "started": {
+            "process": "core/Split_9dlb1",
+            "port": "out",
+            "metadata": {
+                "x": 972,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "c-blinken/Timeline_cii0y": {
+            "component": "c-blinken/Timeline",
+            "metadata": {
+                "label": "Timeline",
+                "x": 576,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/RunInterval_3rjwv": {
+            "component": "core/RunInterval",
+            "metadata": {
+                "label": "RunInterval",
+                "x": 972,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "filesystem/ReadFile_i9nla": {
+            "component": "filesystem/ReadFile",
+            "metadata": {
+                "label": "ReadFile",
+                "x": 144,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "yaml/ParseYaml_s9rez": {
+            "component": "yaml/ParseYaml",
+            "metadata": {
+                "label": "ParseYaml",
+                "x": 360,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Merge_ylka8": {
+            "component": "core/Merge",
+            "metadata": {
+                "label": "Merge",
+                "x": 792,
+                "y": 540,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "c-blinken/AnimationsDir_ccoo8": {
+            "component": "c-blinken/AnimationsDir",
+            "metadata": {
+                "label": "AnimationsDir",
+                "x": 0,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Split_gq684": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "Split",
+                "x": 792,
+                "y": 396,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Split_9dlb1": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "Split",
+                "x": 792,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "core/RunInterval_3rjwv",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "tick"
+            },
+            "metadata": {
+                "route": 6
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Merge_ylka8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "yaml/ParseYaml_s9rez",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Merge_ylka8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "filesystem/ReadFile_i9nla",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Merge_ylka8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "filesystem/ReadFile_i9nla",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "yaml/ParseYaml_s9rez",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "yaml/ParseYaml_s9rez",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "timeline"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/AnimationsDir_ccoo8",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "filesystem/ReadFile_i9nla",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "started"
+            },
+            "tgt": {
+                "process": "core/Split_9dlb1",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "core/Split_9dlb1",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "core/RunInterval_3rjwv",
+                "port": "start"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "finished"
+            },
+            "tgt": {
+                "process": "core/Split_gq684",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "core/Split_gq684",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "core/RunInterval_3rjwv",
+                "port": "stop"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "data": "utf-8",
+            "tgt": {
+                "process": "filesystem/ReadFile_i9nla",
+                "port": "encoding"
+            }
+        },
+        {
+            "data": 10,
+            "tgt": {
+                "process": "core/RunInterval_3rjwv",
+                "port": "interval"
+            }
+        }
+    ]
+}

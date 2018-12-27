@@ -1,0 +1,10 @@
+total_time: 60
+tracks:
+  - name: infodisplays
+    commands:
+      0:
+        - 'http://example.net'
+      10:
+        - 'http://example.com'
+      55:
+        - 'http://example.org'
