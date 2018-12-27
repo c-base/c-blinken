@@ -2,8 +2,8 @@ const noflo = require('noflo');
 
 function replaceInCommand(command, state) {
   return command
-    .replace('__START__', state.startTime)
-    .replace('__END__', state.endTime)
+    .replace('__START__', state.startTime.toISOString())
+    .replace('__END__', state.endTime.toISOString())
     .replace('__ELAPSED__', state.elapsed);
 }
 
