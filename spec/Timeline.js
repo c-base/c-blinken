@@ -73,7 +73,7 @@ describe('Timeline component', () => {
             commands: {
               0: ['start'],
               1: ['one'],
-              3: ['three'],
+              3: ['three __ELAPSED__'],
             },
           },
         ],
@@ -124,7 +124,7 @@ describe('Timeline component', () => {
         });
       });
       finished.once('data', () => {
-        chai.expect(receivedCommands[0]).to.eql(['three']);
+        chai.expect(receivedCommands[0]).to.eql(['three 3']);
         callback();
       });
       manipulateTimes(c, 3);

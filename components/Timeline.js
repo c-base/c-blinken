@@ -1,5 +1,12 @@
 const noflo = require('noflo');
 
+function replaceInCommand(command, state) {
+  return command
+    .replace('__START__', state.startTime)
+    .replace('__END__', state.endTime)
+    .replace('__ELAPSED__', state.elapsed);
+}
+
 exports.getComponent = () => {
   const c = new noflo.Component();
   c.icon = 'play';
@@ -39,10 +46,12 @@ exports.getComponent = () => {
     if (input.hasData('timeline')) {
       c.state.timelineDefinition = input.getData('timeline');
       // TODO: Validate definition?
-      output.done();
-      return;
+      if (!input.hasData('start')) {
+        output.done();
+        return;
+      }
     }
-    if (input.hasData('start')) {
+    if (input.hasData('start') && c.state.timelineDefinition) {
       input.getData('start');
       if (c.state.running) {
         output.done(new Error('Timeline is already running'));
@@ -77,9 +86,17 @@ exports.getComponent = () => {
           if (slotSeconds <= elapsed) {
             // Send this these commands
             track.commands[slot].forEach((command) => {
-              console.log(`At ${elapsed}s: send to ${idx}: '${command}'`);
+              let commandToSend = command;
+              if (typeof command === 'string') {
+                commandToSend = replaceInCommand(commandToSend, {
+                  startTime: c.state.startTime,
+                  endTime: c.state.endTime,
+                  elapsed,
+                });
+              }
+              console.log(`At ${elapsed}s: send to ${idx}: '${commandToSend}'`);
               output.send({
-                command: new noflo.IP('data', command, {
+                command: new noflo.IP('data', commandToSend, {
                   index: idx,
                 }),
               });
@@ -94,6 +111,7 @@ exports.getComponent = () => {
 
       // Either finish or continue
       if (now >= c.state.endTime) {
+        console.log(`At ${elapsed}s: timeline finished`);
         c.state.context.deactivate();
         c.state = {
           timelineDefinition: c.state.timelineDefinition,
