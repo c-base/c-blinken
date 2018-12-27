@@ -10,16 +10,6 @@
     },
     "inports": {
         "run": {
-            "process": "c-blinken/Timeline_cii0y",
-            "port": "start",
-            "metadata": {
-                "x": -144,
-                "y": 216,
-                "width": 72,
-                "height": 72
-            }
-        },
-        "filename": {
             "process": "c-blinken/AnimationsDir_ccoo8",
             "port": "in",
             "metadata": {
@@ -317,6 +307,19 @@
             "tgt": {
                 "process": "yaml/ParseYaml_s9rez",
                 "port": "in"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "yaml/ParseYaml_s9rez",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "c-blinken/Timeline_cii0y",
+                "port": "start"
             },
             "metadata": {
                 "route": 2

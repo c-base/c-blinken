@@ -250,13 +250,6 @@
             }
         },
         {
-            "data": "crash",
-            "tgt": {
-                "process": "c-blinken/ExecuteTimeline_wucb8",
-                "port": "filename"
-            }
-        },
-        {
             "data": [
                 "ws://rpne2.35c3.c-base.org:81/"
             ],
