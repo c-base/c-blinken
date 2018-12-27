@@ -66,6 +66,7 @@ exports.getComponent = () => {
       c.state.modes = [];
       Promise.all(c.state.lights.map((client, idx) => client.status()
         .then((result) => {
+          console.log(`Storing light ${idx} state as`, result);
           c.state.modes[idx] = result;
           return JSON.stringify(result);
         })))
@@ -86,6 +87,7 @@ exports.getComponent = () => {
       }
       Promise.all(c.state.lights.map((client, idx) => {
         const state = c.state.modes[idx];
+        console.log(`Restoring light ${idx} to state`, state);
         if (!state) {
           return Promise.resolve('NO STATE');
         }
