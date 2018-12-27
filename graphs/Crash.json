@@ -1,0 +1,278 @@
+{
+    "caseSensitive": false,
+    "properties": {
+        "name": "Crash",
+        "description": "Crash the c-base space station",
+        "icon": "fire",
+        "environment": {
+            "type": "noflo-nodejs"
+        }
+    },
+    "inports": {
+        "run": {
+            "process": "c-blinken/ExecuteTimeline_wucb8",
+            "port": "run",
+            "metadata": {
+                "x": 360,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "soundtrack": {
+            "process": "core/Repeat_j1gtc",
+            "port": "out",
+            "metadata": {
+                "x": 864,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "infodisplays": {
+            "process": "core/Repeat_sh10y",
+            "port": "out",
+            "metadata": {
+                "x": 864,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "c-blinken/ExecuteTimeline_wucb8": {
+            "component": "c-blinken/ExecuteTimeline",
+            "metadata": {
+                "label": "ExecuteTimeline",
+                "x": 504,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "c-blinken/McLighting_nd0zl": {
+            "component": "c-blinken/McLighting",
+            "metadata": {
+                "label": "McLighting",
+                "x": 720,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "c-blinken/McLighting_tbilv": {
+            "component": "c-blinken/McLighting",
+            "metadata": {
+                "label": "McLighting",
+                "x": 720,
+                "y": 360,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_j1gtc": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "Repeat",
+                "x": 720,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_sh10y": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "Repeat",
+                "x": 720,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Output_pe6v8": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "Output",
+                "x": 864,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "started"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_nd0zl",
+                "port": "store"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "started"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_tbilv",
+                "port": "store"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "finished"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_nd0zl",
+                "port": "restore"
+            },
+            "metadata": {
+                "route": 9
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "finished"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_tbilv",
+                "port": "restore"
+            },
+            "metadata": {
+                "route": 9
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "core/Repeat_j1gtc",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "core/Repeat_sh10y",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_nd0zl",
+                "port": "command"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "c-blinken/McLighting_tbilv",
+                "port": "command"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_pe6v8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/McLighting_tbilv",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_pe6v8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/McLighting_nd0zl",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_pe6v8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "data": "crash",
+            "tgt": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "filename"
+            }
+        },
+        {
+            "data": [
+                "ws://rpne2.35c3.c-base.org:81/"
+            ],
+            "tgt": {
+                "process": "c-blinken/McLighting_nd0zl",
+                "port": "addresses"
+            }
+        },
+        {
+            "data": [
+                "ws://rpne1.35c3.c-base.org:81/"
+            ],
+            "tgt": {
+                "process": "c-blinken/McLighting_tbilv",
+                "port": "addresses"
+            }
+        }
+    ]
+}
