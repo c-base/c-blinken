@@ -98,7 +98,7 @@
             "component": "filesystem/ReadFile",
             "metadata": {
                 "label": "ReadFile",
-                "x": 144,
+                "x": 108,
                 "y": 108,
                 "width": 72,
                 "height": 72
@@ -128,7 +128,7 @@
             "component": "c-blinken/AnimationsDir",
             "metadata": {
                 "label": "AnimationsDir",
-                "x": 0,
+                "x": -36,
                 "y": 108,
                 "width": 72,
                 "height": 72
@@ -150,6 +150,16 @@
                 "label": "Split",
                 "x": 792,
                 "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "groups/RemoveGroups_pjn2y": {
+            "component": "groups/RemoveGroups",
+            "metadata": {
+                "label": "RemoveGroups",
+                "x": 252,
+                "y": 36,
                 "width": 72,
                 "height": 72
             }
@@ -206,19 +216,6 @@
             },
             "metadata": {
                 "route": 1
-            }
-        },
-        {
-            "src": {
-                "process": "filesystem/ReadFile_i9nla",
-                "port": "out"
-            },
-            "tgt": {
-                "process": "yaml/ParseYaml_s9rez",
-                "port": "in"
-            },
-            "metadata": {
-                "route": 2
             }
         },
         {
@@ -297,6 +294,32 @@
             },
             "metadata": {
                 "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "filesystem/ReadFile_i9nla",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "groups/RemoveGroups_pjn2y",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
+            "src": {
+                "process": "groups/RemoveGroups_pjn2y",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "yaml/ParseYaml_s9rez",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 2
             }
         },
         {
