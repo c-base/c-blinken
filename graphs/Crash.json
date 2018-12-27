@@ -251,7 +251,10 @@
         },
         {
             "data": [
-                "ws://rpnw2.35c3.c-base.org:81/"
+                "ws://rpnw2.35c3.c-base.org:81/",
+                "ws://rpne2.35c3.c-base.org:81/",
+                "ws://rpse2.35c3.c-base.org:81/",
+                "ws://rpsw2.35c3.c-base.org:81/"
             ],
             "tgt": {
                 "process": "c-blinken/McLighting_nd0zl",
@@ -260,7 +263,10 @@
         },
         {
             "data": [
-                "ws://rpnw1.35c3.c-base.org:81/"
+                "ws://rpnw1.35c3.c-base.org:81/",
+                "ws://rpne1.35c3.c-base.org:81/",
+                "ws://rpse1.35c3.c-base.org:81/",
+                "ws://rpsw1.35c3.c-base.org:81/"
             ],
             "tgt": {
                 "process": "c-blinken/McLighting_tbilv",
