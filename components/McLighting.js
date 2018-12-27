@@ -51,7 +51,7 @@ exports.getComponent = () => {
     }
     if (input.hasData('command')) {
       const command = input.getData('command');
-      Promise.all(c.state.lights.map(client => client(command)))
+      Promise.all(c.state.lights.map(client => client.send(command)))
         .then((result) => {
           output.sendDone({
             out: result,
@@ -64,10 +64,10 @@ exports.getComponent = () => {
     if (input.hasData('store')) {
       input.getData('store');
       c.state.modes = [];
-      Promise.all(c.state.lights.map((client, idx) => client('$')
+      Promise.all(c.state.lights.map((client, idx) => client.status()
         .then((result) => {
-          c.state.modes[idx] = JSON.parse(result);
-          return result;
+          c.state.modes[idx] = result;
+          return JSON.stringify(result);
         })))
         .then((result) => {
           output.sendDone({
@@ -89,10 +89,10 @@ exports.getComponent = () => {
         if (!state) {
           return Promise.resolve('NO STATE');
         }
-        return client(color.rgb(state.color).hex())
-          .then(() => client(`?${state.delay_ms}`))
-          .then(() => client(`%${state.brightness}`))
-          .then(() => client(`/${state.mode}`));
+        return client.send(color.rgb(state.color).hex())
+          .then(() => client.send(`?${state.delay_ms}`))
+          .then(() => client.send(`%${state.brightness}`))
+          .then(() => client.send(`/${state.mode}`));
       }))
         .then((result) => {
           output.sendDone({
