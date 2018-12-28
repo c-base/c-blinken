@@ -18,6 +18,16 @@
                 "width": 72,
                 "height": 72
             }
+        },
+        "in": {
+            "process": "flow/Gate_uov23",
+            "port": "in",
+            "metadata": {
+                "x": 360,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
         }
     },
     "outports": {
@@ -37,6 +47,16 @@
             "metadata": {
                 "x": 864,
                 "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "out": {
+            "process": "flow/Gate_uov23",
+            "port": "out",
+            "metadata": {
+                "x": 864,
+                "y": 468,
                 "width": 72,
                 "height": 72
             }
@@ -100,6 +120,26 @@
                 "label": "Output",
                 "x": 864,
                 "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "flow/Gate_uov23": {
+            "component": "flow/Gate",
+            "metadata": {
+                "label": "Gate",
+                "x": 720,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_tg777": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "Repeat",
+                "x": 504,
+                "y": 540,
                 "width": 72,
                 "height": 72
             }
@@ -250,11 +290,50 @@
             }
         },
         {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "started"
+            },
+            "tgt": {
+                "process": "flow/Gate_uov23",
+                "port": "close"
+            },
+            "metadata": {
+                "route": 3
+            }
+        },
+        {
+            "src": {
+                "process": "c-blinken/ExecuteTimeline_wucb8",
+                "port": "finished"
+            },
+            "tgt": {
+                "process": "flow/Gate_uov23",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 9
+            }
+        },
+        {
+            "src": {
+                "process": "core/Repeat_tg777",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "flow/Gate_uov23",
+                "port": "open"
+            },
+            "metadata": {
+                "route": 2
+            }
+        },
+        {
             "data": [
-                "ws://rpnw2.35c3.c-base.org:81/",
                 "ws://rpne2.35c3.c-base.org:81/",
                 "ws://rpse2.35c3.c-base.org:81/",
-                "ws://rpsw2.35c3.c-base.org:81/"
+                "ws://rpsw2.35c3.c-base.org:81/",
+                "ws://rpnw2.35c3.c-base.org:81/"
             ],
             "tgt": {
                 "process": "c-blinken/McLighting_nd0zl",
@@ -263,15 +342,23 @@
         },
         {
             "data": [
-                "ws://rpnw1.35c3.c-base.org:81/",
                 "ws://rpne1.35c3.c-base.org:81/",
                 "ws://rpse1.35c3.c-base.org:81/",
-                "ws://rpsw1.35c3.c-base.org:81/"
+                "ws://rpsw1.35c3.c-base.org:81/",
+                "ws://rpnw1.35c3.c-base.org:81/"
             ],
             "tgt": {
                 "process": "c-blinken/McLighting_tbilv",
                 "port": "addresses"
             }
+        },
+        {
+            "data": "true",
+            "tgt": {
+                "process": "core/Repeat_tg777",
+                "port": "in"
+            }
         }
     ]
 }
+
