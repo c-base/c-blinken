@@ -65,7 +65,7 @@
     "groups": [],
     "processes": {
         "c-blinken/Timeline_cii0y": {
-            "component": "c-blinken/Timeline",
+            "component": "tween/Timeline",
             "metadata": {
                 "label": "Timeline",
                 "x": 576,
