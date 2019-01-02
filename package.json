@@ -33,6 +33,7 @@
     "noflo-filesystem": "^2.0.1",
     "noflo-flow": "^0.7.0",
     "noflo-groups": "^0.3.0",
+    "noflo-mclighting": "^0.1.0",
     "noflo-runtime-msgflo": "^0.12.0",
     "noflo-tween": "^0.3.0",
     "noflo-yaml": "^0.4.0",

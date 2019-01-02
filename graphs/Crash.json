@@ -75,7 +75,7 @@
             }
         },
         "c-blinken/McLighting_nd0zl": {
-            "component": "c-blinken/McLighting",
+            "component": "mclighting/McLighting",
             "metadata": {
                 "label": "McLighting",
                 "x": 720,
@@ -85,7 +85,7 @@
             }
         },
         "c-blinken/McLighting_tbilv": {
-            "component": "c-blinken/McLighting",
+            "component": "mclighting/McLighting",
             "metadata": {
                 "label": "McLighting",
                 "x": 720,
