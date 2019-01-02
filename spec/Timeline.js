@@ -24,7 +24,7 @@ describe('Timeline component', () => {
   let error;
   before((callback) => {
     const loader = new noflo.ComponentLoader(path.resolve(__dirname, '../'));
-    loader.load('c-blinken/Timeline', (err, instance) => {
+    loader.load('tween/Timeline', (err, instance) => {
       if (err) {
         callback(err);
         return;
